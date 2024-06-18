@@ -1,0 +1,40 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/application/health": {
+            "get": {
+                "description": "get the status of the service",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Show the status of the service",
+                "responses": {}
+            }
+        },
+        "/ping": {
+            "get": {
+                "description": "Responds with a JSON object containing a pong message",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Responds with a pong message",
+                "responses": {}
+            }
+        }
+    }
+}

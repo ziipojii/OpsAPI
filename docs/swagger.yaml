@@ -1,0 +1,26 @@
+info:
+  contact: {}
+paths:
+  /application/health:
+    get:
+      consumes:
+      - application/json
+      description: get the status of the service
+      produces:
+      - application/json
+      responses: {}
+      summary: Show the status of the service
+      tags:
+      - health
+  /ping:
+    get:
+      consumes:
+      - application/json
+      description: Responds with a JSON object containing a pong message
+      produces:
+      - application/json
+      responses: {}
+      summary: Responds with a pong message
+      tags:
+      - health
+swagger: "2.0"
