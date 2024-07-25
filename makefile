@@ -6,8 +6,8 @@ DOCS_DIR = ./docs
 .PHONY: help
 help:
 	@echo "Use make for:"
-	@echo "  - init-swagger : Generate Swagger docs"
-	@echo " - run : Running service"
+	@echo " - init-swagger : Generate Swagger docs"
+	@echo " - run          : Running service"
 
 # For generate swagger docs
 .PHONY: init-swagger
@@ -18,7 +18,6 @@ init-swagger:
 
 # Run Service
 .PHONY: run
-run: 
-	@echo "Run Service"
+run:
+  @echo "Run Service"
 	go run ./src/cmd/main.go
-

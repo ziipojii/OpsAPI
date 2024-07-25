@@ -46,6 +46,22 @@ const docTemplate = `{
                 "summary": "Responds with a pong message",
                 "responses": {}
             }
+        },
+        "/tix-devops-api/ping": {
+            "get": {
+                "description": "Responds with a JSON object containing a pong message",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Responds with a pong message",
+                "responses": {}
+            }
         }
     }
 }`
