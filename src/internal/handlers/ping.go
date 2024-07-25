@@ -12,6 +12,7 @@ import (
 // @Accept       json
 // @Produce      json
 // @Router       /ping [get]
+// @Router       /tix-devops-api/ping [get]
 func PingHandler(c *gin.Context) {
 	
 	jsonResponse := gin.H{

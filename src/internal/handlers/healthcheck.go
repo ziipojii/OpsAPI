@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"time"
 	"net/http"
-    "github.com/gin-gonic/gin"
-	"github.com/ziipojii/OpsAPI.git/src/internal/infrastructure/config"
+	"time"
 
+	"github.com/gin-gonic/gin"
+	"github.com/ziipojii/OpsAPI.git/src/internal/infrastructure/config"
 )
 
 // HealthCheck godoc
@@ -15,23 +15,20 @@ import (
 // @Accept  json
 // @Produce  json
 // @Router /application/health [get]
-func HealthCheck(c *gin.Context) {
-	// Load application configuration
-	cfg, err := config.Config()
-	if err != nil {
-        c.JSON(500, gin.H{
-            "error": "Failed to load configuration",
-        })
-        return	
+func HealthCheck(c *gin.Context, cfg *config.Config) {
+	if cfg == nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Configuration not provided",
+		})
+		return
 	}
-	
-	// JSON respond
+
+	// JSON response
 	jsonResponse := gin.H{
-		"message":   "Service " + cfg.ServiceName + " up and running",
+		"message":   "Service " + cfg.App.ServiceName + " up and running",
 		"timestamp": time.Now().Format(time.RFC3339),
 	}
-	
-	// send responsd JSON
-	c.JSON(http.StatusOK, jsonResponse)
 
+	// Send response JSON
+	c.JSON(http.StatusOK, jsonResponse)
 }
