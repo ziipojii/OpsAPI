@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: percona/percona-server-mongodb:4.2.25
+    container_name: mongodb
+    env_file:
+      - ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MAIN_DBUSER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MAIN_DBPASS}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mongo_network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  mongo_network:
+    driver: bridge

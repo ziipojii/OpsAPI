@@ -7,7 +7,7 @@ DOCS_DIR = ./docs
 help:
 	@echo "Use make for:"
 	@echo " - init-swagger : Generate Swagger docs"
-	@echo " - run          : Running service"
+	@echo " - run-local         : Running service locally"
 
 # For generate swagger docs
 .PHONY: init-swagger
@@ -15,9 +15,9 @@ init-swagger:
 	@echo "Generating Swagger docs..."
 	swag init -g ./src/cmd/main.go
 
-
 # Run Service
-.PHONY: run
-run:
-  @echo "Run Service"
-	go run ./src/cmd/main.go
+.PHONY: run-local
+run-local:
+	@echo "Run Service"
+	cp .env.local .env
+	go run $(CMD_DIR)/main.go

@@ -1,6 +1,8 @@
 package config
 
 import (
+	"os"
+
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/pkg/errors"
@@ -16,24 +18,22 @@ type (
 	AppCfg struct {
 		HttpServerPort int    `envconfig:"HTTP_SERVER_PORT" default:"8888"`
 		ServiceName    string `envconfig:"SERVICE_NAME" default:"tix-devops-api"`
-		AppEnv         string `envconfig:"APP_ENV" default:"production"`
+		AppEnv         string `envconfig:"APP_ENV" default:"local"`
 	}
 
 	DatabaseCfg struct {
 		DBName string `envconfig:"MAIN_DBNAME" default:"dbname" required:"true"`
 		DBUser string `envconfig:"MAIN_DBUSER" default:"dbuser" required:"true"`
 		DBPass string `envconfig:"MAIN_DBPASS" default:"dbpass" required:"true"`
-		Host   string `envconfig:"MAIN_HOST" default:"localhost" required:"true"`
-		Port   string `envconfig:"MAIN_PORT" default:"27017" required:"true"`
+		Host   string `envconfig:"MAIN_DB_URI" default:"localhost:27017" required:"true"`
 	}
 )
 
 // LoadConfig loads configuration from environment variables.
 func LoadConfig() (*Config, error) {
 	// Load environment variables
-	err := godotenv.Load()
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to load .env file")
+	if err := godotenv.Load(); err != nil && !os.IsNotExist(err) {
+		return nil, errors.Wrap(err, "failed to load .env")
 	}
 
 	cfg := &Config{
