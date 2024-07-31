@@ -23,6 +23,59 @@ paths:
       summary: Responds with a pong message
       tags:
       - health
+  /tix-devops-api/insert:
+    post:
+      consumes:
+      - application/json
+      description: Insert JSON data into MongoDB with service_name, environment, and
+        jenkins_host headers
+      parameters:
+      - description: JSON payload
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      - description: Service Name
+        in: header
+        name: X-Service-Name
+        required: true
+        type: string
+      - description: Environment
+        in: header
+        name: X-Environment
+        required: true
+        type: string
+      - description: Jenkins Host
+        in: header
+        name: X-Jenkins-Host
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Successfully inserted
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Insert data into MongoDB
+      tags:
+      - wfapi
   /tix-devops-api/ping:
     get:
       consumes:

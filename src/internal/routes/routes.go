@@ -10,7 +10,7 @@ import (
 	"github.com/ziipojii/OpsAPI.git/src/internal/infrastructure/config"
 )
 
-func SetupRouter(cfg *config.Config) *gin.Engine {
+func DefaultRouter(cfg *config.Config) *gin.Engine {
 	r := gin.Default()
 
 	// Register handlers with config
@@ -24,12 +24,18 @@ func SetupRouter(cfg *config.Config) *gin.Engine {
 
 	// Base path (/service_name/path)
 	base := r.Group("/" + cfg.App.ServiceName)
-	{
-		base.GET("/ping", handlers.PingHandler)
-	}
+	ServiceRoutes(base, cfg)
 
 	// swaggo
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return r
+}
+
+func ServiceRoutes(base *gin.RouterGroup, cfg *config.Config) {
+	// base.GET("/ping", handlers.PingHandler)
+
+	base.POST("/insertwfapi", func(c *gin.Context) {
+		handlers.InsertWfapi(c, cfg)
+	})
 }

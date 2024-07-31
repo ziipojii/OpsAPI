@@ -47,6 +47,83 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/tix-devops-api/insert": {
+            "post": {
+                "description": "Insert JSON data into MongoDB with service_name, environment, and jenkins_host headers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "wfapi"
+                ],
+                "summary": "Insert data into MongoDB",
+                "parameters": [
+                    {
+                        "description": "JSON payload",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Service Name",
+                        "name": "X-Service-Name",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Environment",
+                        "name": "X-Environment",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Jenkins Host",
+                        "name": "X-Jenkins-Host",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully inserted",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tix-devops-api/ping": {
             "get": {
                 "description": "Responds with a JSON object containing a pong message",

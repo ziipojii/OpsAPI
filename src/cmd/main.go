@@ -35,7 +35,7 @@ func main() {
 	}
 
 	// Setup route with config
-	r := routes.SetupRouter(cfg)
+	r := routes.DefaultRouter(cfg)
 
 	r.Run(":" + port)
 }
