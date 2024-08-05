@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 golang:1.22.4 as base-golang
+FROM --platform=linux/amd64 asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/golang:1.22.4 as base-golang
 
 # Set workdir for base-golang
 WORKDIR /app
