@@ -34,4 +34,11 @@ docker-build:
 .PHONY: docker-up
 docker-up:
 	@echo "Running Docker Compose..."
-	docker-compose up --build
+	docker-compose up -d --build
+
+# Run Docker Compose
+.PHONY: docker-down
+docker-up:
+	@echo "Stop Docker Compose..."
+	docker-compose down
+
